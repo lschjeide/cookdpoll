@@ -1,0 +1,10 @@
+name             'cookdpoll'
+maintainer       'YOUR_NAME'
+maintainer_email 'YOUR_EMAIL'
+license          'All rights reserved'
+description      'Installs/Configures cookdpoll'
+long_description 'Installs/Configures cookdpoll'
+version          '0.1.0'
+
+depends 'ruby'
+depends 'mysql'

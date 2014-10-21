@@ -1,0 +1,1 @@
+default[:languages][:ruby][:default_version] = "2.1.0-p0"
