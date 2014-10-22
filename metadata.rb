@@ -8,3 +8,4 @@ version          '0.1.0'
 
 depends 'nodejs'
 depends 'ruby_install'
+depends 'bundler'
