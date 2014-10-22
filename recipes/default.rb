@@ -45,3 +45,7 @@ end
 link "usr/bin/bundler" do 
 	to bundler_path
 end
+
+execute "yum install -y libxml2 libxml2-devel libxslt libxslt-devel mysql-devel"
+
+execute "bundle config build.nokogiri --use-system-libraries"
