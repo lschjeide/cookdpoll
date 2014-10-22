@@ -1,1 +1,2 @@
-default[:languages][:ruby][:default_version] = "2.1.0-p0"
+
+default['ruby_install']['ruby_version'] = '2.0.0-p576'

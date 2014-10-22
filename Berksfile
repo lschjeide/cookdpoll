@@ -2,6 +2,5 @@ source "https://supermarket.getchef.com"
 
 metadata
 
-cookbook "mysql"
-cookbook "ruby"
-cookbook "nginx", "~> 2.6"
+cookbook 'nodejs', '~> 2.1.0'
+cookbook 'ruby_install'

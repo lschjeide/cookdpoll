@@ -6,5 +6,5 @@ description      'Installs/Configures cookdpoll'
 long_description 'Installs/Configures cookdpoll'
 version          '0.1.0'
 
-depends 'ruby'
-depends 'mysql'
+depends 'nodejs'
+depends 'ruby_install'
