@@ -20,7 +20,7 @@ set -e
 APP_ROOT=/home/ec2-user/unicorn
 PID=/home/ec2-user/unicorn/tmp/pids/unicorn.pid 
 ENV=production
-CMD="/usr/bin/bundle exec unicorn_rails -D -E $ENV -c config/unicorn.rb"
+CMD="/usr/bin/bundle exec unicorn_rails -D -E $ENV -p 80 -c config/unicorn.rb"
  
 old_pid="$PID.oldbin"
  
