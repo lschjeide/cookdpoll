@@ -1,0 +1,68 @@
+#!/bin/sh
+#
+# unicorn       This shell script takes care of starting and stopping
+#               Unicorns.
+#
+# chkconfig: - 85 15
+# description:  Unicorn Web server.
+# processname: unicorn
+# pidfile: /var/run/unicorn/unicorn.pid
+
+set -u
+set -e
+# Example init script, this can be used with nginx, too,
+# since nginx and unicorn accept the same signals
+#sudo chkconfig unicorn on
+#sudo /sbin/service unicorn start
+
+ 
+# Feel free to change any of the following variables for your app:
+APP_ROOT=/home/ec2-user/unicorn
+PID=/home/ec2-user/unicorn/tmp/pids/unicorn.pid 
+ENV=production
+CMD="/usr/bin/bundle exec unicorn_rails -D -E $ENV -c config/unicorn.rb"
+ 
+old_pid="$PID.oldbin"
+ 
+cd $APP_ROOT || exit 1
+ 
+sig () {
+	test -s "$PID" && kill -$1 `cat $PID`
+}
+ 
+oldsig () {
+	test -s $old_pid && kill -$1 `cat $old_pid`
+}
+ 
+case $1 in
+start)
+	sig 0 && echo >&2 "Already running" && exit 0
+	$CMD
+	;;
+stop)
+	sig QUIT && exit 0
+	echo >&2 "Not running"
+	;;
+force-stop)
+	sig TERM && exit 0
+	echo >&2 "Not running"
+	;;
+restart|reload)
+	sig HUP && echo reloaded OK && exit 0
+	echo >&2 "Couldn't reload, starting '$CMD' instead"
+	$CMD
+	;;
+upgrade)
+	sig USR2 && exit 0
+	echo >&2 "Couldn't upgrade, starting '$CMD' instead"
+	$CMD
+	;;
+rotate)
+        sig USR1 && echo rotated logs OK && exit 0
+        echo >&2 "Couldn't rotate logs" && exit 1
+        ;;
+*)
+	echo >&2 "Usage: $0 <start|stop|restart|upgrade|rotate|force-stop>"
+	exit 1
+	;;
+esac

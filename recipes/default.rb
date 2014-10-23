@@ -46,6 +46,17 @@ link "usr/bin/bundler" do
 	to bundler_path
 end
 
+template '/etc/init.d/unicorn' do
+  source 'unicorn.erb'
+  mode 0755
+end
+
+bash "add_unicorn_service" do
+  code <<-EOH
+    chkconfig unicorn on
+  EOH
+end
+
 execute "yum install -y libxml2 libxml2-devel libxslt libxslt-devel mysql-devel"
 
 execute "bundle config build.nokogiri --use-system-libraries"
