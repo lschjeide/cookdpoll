@@ -59,4 +59,16 @@ end
 
 execute "yum install -y libxml2 libxml2-devel libxslt libxslt-devel mysql-devel"
 
+file '/home/ec2-user/.bundle/config' do
+	content "---
+BUNDLE_BUILD__NOKOGIRI: --use-system-libraries"
+end
+
 execute "bundle config build.nokogiri --use-system-libraries"
+
+file '/home/ec2-user/unicorn' do 
+	mode 0644
+	owner 'ec2-user'
+	group 'ec2-user'
+	action :touch
+end
