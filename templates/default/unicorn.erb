@@ -19,7 +19,7 @@ set -e
 # Feel free to change any of the following variables for your app:
 APP_ROOT=/home/ec2-user/unicorn
 PID=/home/ec2-user/unicorn/tmp/pids/unicorn.pid 
-ENV=production
+ENV=`cat /tmp/unicorn_environment`
 CMD="/usr/bin/bundle exec unicorn_rails -D -E $ENV -p 80 -c config/unicorn.rb"
  
 old_pid="$PID.oldbin"
@@ -28,10 +28,6 @@ cd $APP_ROOT || exit 1
  
 sig () {
 	test -s "$PID" && kill -$1 `cat $PID`
-}
- 
-oldsig () {
-	test -s $old_pid && kill -$1 `cat $old_pid`
 }
  
 case $1 in
