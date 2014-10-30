@@ -59,6 +59,13 @@ end
 
 execute "yum install -y libxml2 libxml2-devel libxslt libxslt-devel mysql-devel"
 
+user "ec2-user" do
+    comment "EC2 Default User"
+    home "/home/ec2-user"
+    shell "/bin/bash"
+    password "x"
+end
+
 directory "/home/ec2-user/.bundle" do
   owner 'ec2-user'
   group 'ec2-user'
