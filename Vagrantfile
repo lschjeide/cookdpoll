@@ -41,6 +41,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     aws.region = "ap-southeast-2"
     aws.availability_zone = "ap-southeast-2b"
     aws.instance_type = "t2.small"
+    aws.elastic_ip = "54.66.200.75"
     aws.tags = {'Name' => ENV['HOSTNAME'], 'created-by' => 'tmorgan@dius.com.au'}
 
     override.ssh.username = "ec2-user"
