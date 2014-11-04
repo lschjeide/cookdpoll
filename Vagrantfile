@@ -41,7 +41,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     aws.region = "ap-southeast-2"
     aws.availability_zone = "ap-southeast-2b"
     aws.instance_type = "t2.small"
-    aws.tags = {'Name' => ENV['HOSTNAME'], 'created-by' => 'tmorgan@dius.com.au'}
+    aws.tags = {'Name' => ENV['AWSNAME'], 'created-by' => 'tmorgan@dius.com.au'}
 
     override.ssh.username = "ec2-user"
     override.ssh.private_key_path = "~/.ssh/jenkins-slave-key"
