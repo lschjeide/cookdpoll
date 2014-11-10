@@ -5,7 +5,7 @@ NEW_INSTANCE_ID=$(aws ec2 describe-instances   --region=ap-southeast-2   --filte
 
 aws elb register-instances-with-load-balancer --load-balancer-name testdpoll2 --instances $NEW_INSTANCE_ID
 
-OLD_INSTANCE_ID=$(aws ec2 describe-instances   --region=ap-southeast-2   --filter "Name=tag:Old,Values=true"   --query='Reservations[*].Instances[*].InstanceId'   --output=text)
+OLD_INSTANCE_ID=$(aws ec2 describe-instances   --region=ap-southeast-2   --filter "Name=tag:Live,Values=false"   --query='Reservations[*].Instances[*].InstanceId'   --output=text)
 
 aws elb deregister-instances-from-load-balancer --load-balancer-name testdpoll2 --instances $OLD_INSTANCE_ID
 
