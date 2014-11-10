@@ -84,7 +84,7 @@ end
 execute "bundle config build.nokogiri --use-system-libraries"
 
 directory '/home/ec2-user/unicorn' do 
-	mode 0644
+	mode 0755
 	owner 'ec2-user'
 	group 'ec2-user'
 	action :create
