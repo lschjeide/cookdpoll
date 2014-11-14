@@ -24,7 +24,7 @@ VAGRANT_LOG=debug AWSNAME=${JOB_NAME}-${BUILD_NUMBER} vagrant up --provider=aws
 
 NEW_INSTANCE_ID=$(aws ec2 describe-instances   --region=ap-southeast-2   --filter "Name=tag:Name,Values=$JOB_NAME-$BUILD_NUMBER"   --query='Reservations[*].Instances[*].InstanceId'   --output=text)
 
-if [ "$NEW_INSTANCE_ID" = "" ]
+if [ -n "$NEW_INSTANCE_ID" ]
 then
 	vagrant destroy
     echo "NEW INSTANCE DOES NOT EXIST -- VAGRANT UP FAILED! TRY AGAIN...."
