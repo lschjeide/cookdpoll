@@ -1,6 +1,11 @@
 #!/bin/sh 
 set -x
 
+NEW_INSTANCE_ID=$(aws ec2 describe-instances   --region=ap-southeast-2   --filter "Name=tag:Name,Values=$JOB_NAME-$BUILD_NUMBER"   --query='Reservations[*].Instances[*].InstanceId'   --output=text)
+
+until [ "$NEW_INSTANCE_ID" -ne "" ]
+do
+
 ELB_HOSTNAME=$(aws elb create-load-balancer --load-balancer-name $ELB --listeners Protocol=HTTP,LoadBalancerPort=80,InstanceProtocol=HTTP,InstancePort=80 --availability-zones ap-southeast-2b --security-groups sg-b5ce00d0)
 
 VARIABLE3=`cat <<EOF
@@ -21,6 +26,8 @@ NEW_INSTANCE_ID=$(aws ec2 describe-instances   --region=ap-southeast-2   --filte
 
 if [ "$NEW_INSTANCE_ID" = "" ]
 then
-    echo "NEW INSTANCE DOES NOT EXIST -- VAGRANT UP FAILED!"
-    exit 1
+	vagrant destroy
+    echo "NEW INSTANCE DOES NOT EXIST -- VAGRANT UP FAILED! TRY AGAIN...."
 fi
+
+done
