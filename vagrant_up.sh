@@ -26,8 +26,8 @@ NEW_INSTANCE_ID=$(aws ec2 describe-instances   --region=ap-southeast-2   --filte
 
 if [ -n "$NEW_INSTANCE_ID" ]
 then
-	vagrant destroy
     echo "NEW INSTANCE DOES NOT EXIST -- VAGRANT UP FAILED! TRY AGAIN...."
+    rm -rf .vagrant
 fi
 
 done
