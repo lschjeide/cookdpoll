@@ -89,3 +89,10 @@ directory '/home/ec2-user/unicorn' do
 	group 'ec2-user'
 	action :create
 end
+
+directory '/deploy' do 
+	mode 0755
+	owner 'ec2-user'
+	group 'ec2-user'
+	action :create
+end
