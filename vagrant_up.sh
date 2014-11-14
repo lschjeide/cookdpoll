@@ -28,6 +28,7 @@ if [ -n "$NEW_INSTANCE_ID" ]
 then
     echo "NEW INSTANCE DOES NOT EXIST -- VAGRANT UP FAILED! TRY AGAIN...."
     rm -rf .vagrant
+    vagrant global-status --prune
 fi
 
 done
