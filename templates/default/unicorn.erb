@@ -17,8 +17,8 @@ set -e
 
  
 # Feel free to change any of the following variables for your app:
-APP_ROOT=/home/ec2-user/unicorn
-PID=/home/ec2-user/unicorn/tmp/pids/unicorn.pid 
+APP_ROOT=/deploy/current
+PID=$APP_ROOT/tmp/pids/unicorn.pid 
 ENV=`cat /deploy/unicorn_environment`
 CMD="/usr/bin/bundle exec unicorn_rails -D -E $ENV -p 80 -c config/unicorn.rb"
  
