@@ -23,7 +23,7 @@ ENV=`cat /deploy/unicorn_environment`
 CMD="/usr/bin/bundle exec unicorn_rails -D -E $ENV -p 80 -c config/unicorn.rb"
  
 old_pid="$PID.oldbin"
- 
+
 cd $APP_ROOT || exit 1
  
 sig () {
