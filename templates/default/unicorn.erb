@@ -21,7 +21,7 @@ APP_ROOT=/deploy/current
 PID=$APP_ROOT/tmp/pids/unicorn.pid
 ENV=`cat /deploy/unicorn_environment`
 CMD="cd $APP_ROOT && BUNDLE_GEMFILE=$APP_ROOT/Gemfile bundle exec unicorn -D -c $APP_ROOT/config/unicorn.rb -E $ENV"
-AS_USER=deployer
+AS_USER=ec2-user
 set -u
 
 OLD_PIN="$PID.oldbin"
