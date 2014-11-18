@@ -20,7 +20,7 @@ TIMEOUT=${TIMEOUT-60}
 APP_ROOT=/deploy/current
 PID=/deploy/tmp/pids/unicorn.pid
 ENV=`cat /deploy/unicorn_environment`
-CMD="cd $APP_ROOT && BUNDLE_GEMFILE=$APP_ROOT/Gemfile bundle exec unicorn -p 80 -D -c $APP_ROOT/config/unicorn.rb -E $ENV"
+CMD="cd $APP_ROOT && BUNDLE_GEMFILE=$APP_ROOT/Gemfile bundle exec unicorn -D -c $APP_ROOT/config/unicorn.rb -E $ENV"
 AS_USER=ec2-user
 set -u
 

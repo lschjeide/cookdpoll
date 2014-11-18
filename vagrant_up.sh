@@ -6,7 +6,7 @@ NEW_INSTANCE_ID=$(aws ec2 describe-instances   --region=ap-southeast-2   --filte
 until [ -n "$NEW_INSTANCE_ID" ]
 do
 
-ELB_HOSTNAME=$(aws elb create-load-balancer --load-balancer-name $ELB --listeners Protocol=HTTP,LoadBalancerPort=80,InstanceProtocol=HTTP,InstancePort=80 --availability-zones ap-southeast-2b --security-groups sg-b5ce00d0)
+ELB_HOSTNAME=$(aws elb create-load-balancer --load-balancer-name $ELB --listeners Protocol=HTTP,LoadBalancerPort=80,InstanceProtocol=HTTP,InstancePort=8080 --availability-zones ap-southeast-2b --security-groups sg-b5ce00d0)
 
 VARIABLE3=`cat <<EOF
 {"Comment": "CLI Create route53 resource","Changes": [{"Action": "CREATE","ResourceRecordSet": {"Name": "$DNSNAME.test.dius.com.au","Type": "CNAME","TTL": 300,"ResourceRecords": [{"Value": "$ELB_HOSTNAME"}]}}]}
