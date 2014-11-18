@@ -57,7 +57,12 @@ bash "add_unicorn_service" do
   EOH
 end
 
-execute "yum install -y libxml2 libxml2-devel libxslt libxslt-devel mysql-devel"
+execute "yum install -y libxml2 libxml2-devel libxslt libxslt-devel mysql-devel nginx"
+
+template '/etc/nginx/nginx.conf' do
+  source 'nginx.conf'
+  mode 0755
+end
 
 user "ec2-user" do
     comment "EC2 Default User"
@@ -91,6 +96,20 @@ directory '/home/ec2-user/unicorn' do
 end
 
 directory '/deploy' do 
+	mode 0755
+	owner 'ec2-user'
+	group 'ec2-user'
+	action :create
+end
+
+directory '/deploy/tmp' do 
+	mode 0755
+	owner 'ec2-user'
+	group 'ec2-user'
+	action :create
+end
+
+directory '/deploy/tmp/sockets' do 
 	mode 0755
 	owner 'ec2-user'
 	group 'ec2-user'
